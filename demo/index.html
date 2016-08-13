@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TinyMusic Demo</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <script src="tinymusic.min.js"></script>
+
+        <script>
+            'use strict';
+
+            var tinyMusic = new TM(120, null, [
+                [
+                    'title', [
+                        'GTRC44C44G44A44A#44A44G44E44',
+	                    'BSSC24C24G14G14A#14A#14B14B14'
+                    ]
+                ]
+            ]);
+
+            tinyMusic.play('title');
+        </script>
+    </body>
+</html>

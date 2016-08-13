@@ -9,17 +9,19 @@
 
     var zeroNotes = new Map([['C', 16.35], ['C#', 17.32], ['D', 18.35], ['D#', 19.45], ['E', 20.6], ['F', 21.83], ['F#', 23.12], ['G', 24.5], ['G#', 25.96], ['A', 27.5], ['A#', 29.14], ['B', 30.87], ['X', 0]]);
 
-    function TM(instruments, tracks, bpm) {
+    function TM(bpm, instruments, tracks) {
         this.audioContext = new AudioContext();
         this.tracks = new Map(tracks);
         this.crotchetsPerSecond = bpm / 60;
     }
 
     TM.prototype.play = function play(trackName) {
-        var track = this.tracks.get(trackName);
-        var frequencies = this._parse(track);
+        var trackParts = this.tracks.get(trackName);
 
-        this._loop(frequencies);
+        for (var i in trackParts) {
+            var frequencies = this._parse(trackParts[i]);
+            this._loop(frequencies);
+        }
     };
 
     TM.prototype._parse = function _parse(track) {

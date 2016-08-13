@@ -12,3 +12,5 @@ closure-compiler \
     --js_output_file dist/tinymusic.min.js \
     --compilation_level ADVANCED_OPTIMIZATIONS \
     --externs externs.js
+
+cp dist/tinymusic.min.js demo/
