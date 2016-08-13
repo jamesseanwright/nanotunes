@@ -11,20 +11,19 @@ const CROTCHETS_PER_BAR = 4;
 
 const zeroNotes = new Map([['C', 16.35], ['C#', 17.32], ['D', 18.35], ['D#', 19.45], ['E', 20.6], ['F', 21.83], ['F#', 23.12], ['G', 24.5], ['G#', 25.96], ['A', 27.5], ['A#', 29.14], ['B', 30.87], ['X', 0]]);
 
-const tracks = [
-    'GTRC44C44G44A44A#44A44G44E44',
-    'BSSC24C24G14G14A#14A#14B14B14',
-];
+function TinyMusic(instruments, tracks) {
+    this.audioContext = new AudioContext();
+    this.tracks = new Map(tracks);
+}
 
-const audioContext = new AudioContext();
+TinyMusic.prototype.play = function play(trackName) {
+    const track = this.tracks.get(trackName);
+    const frequencies = this._parse(track);
 
-playButton.onclick = () => {
-    for (let track of tracks) {
-        parse(track);
-    }
+    this._loop(frequencies);
 };
 
-function parse(track) {
+TinyMusic.prototype._parse = function _parse(track) {
     const header = track.match(HEADER_STRUCTURE);
     const instrument = header[1];
     const tempo = header[2];
@@ -39,25 +38,25 @@ function parse(track) {
 
         frequencies.push({
             length,
-            hz: convertToFrequency({ name, octave, length })
+            hz: this._convertToFrequency(name, octave, length)
         });
     }
 
-    loop(frequencies);
-}
+    return frequencies;
+};
 
-function convertToFrequency({ name, octave, length }) {
+TinyMusic.prototype._convertToFrequency = function _convertToFrequency(name, octave, length) {
     const baseFrequency = zeroNotes.get(name);
     return baseFrequency * Math.pow(TWELTH_ROOT_OF_TWO, SEMITONES_PER_OCTAVE * octave);
+};
+
+TinyMusic.prototype._loop = function _loop(frequencies) {
+    const playPromise = frequencies.reduce((promise, freq) => promise.then(() => this._playFreq(freq)), Promise.resolve());
+
+    playPromise.then(() => this._loop(frequencies));
 }
 
-function loop(frequencies) {
-    const playPromise = frequencies.reduce((promise, freq) => promise.then(() => play(freq)), Promise.resolve());
-
-    playPromise.then(() => loop(frequencies));
-}
-
-function play(freq) {
+TinyMusic.prototype._playFreq = function _playFreq(freq) {
     return new Promise(resolve => {
         const oscillator = audioContext.createOscillator();
         const gain = audioContext.createGain();
