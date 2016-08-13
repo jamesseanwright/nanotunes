@@ -1,0 +1,27 @@
+{
+  "name": "tinymusic",
+  "version": "0.1.0",
+  "description": "A small music format and an accompanying implementation using OscillatorNode",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesseanwright/tinymusic.git"
+  },
+  "keywords": [
+    "tiny",
+    "music",
+    "synthesis",
+    "oscillator",
+    "oscillatornode",
+    "js13kgames"
+  ],
+  "author": "James Wright <james@jamesswright.co.uk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamesseanwright/tinymusic/issues"
+  },
+  "homepage": "https://github.com/jamesseanwright/tinymusic#readme"
+}
