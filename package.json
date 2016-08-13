@@ -24,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/jamesseanwright/tinymusic/issues"
   },
-  "homepage": "https://github.com/jamesseanwright/tinymusic#readme"
+  "homepage": "https://github.com/jamesseanwright/tinymusic#readme",
+  "devDependencies": {
+    "babel-cli": "6.11.4",
+    "babel-plugin-transform-es2015-arrow-functions": "6.8.0",
+    "babel-plugin-transform-es2015-block-scoping": "6.10.1"
+  }
 }

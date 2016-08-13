@@ -5,6 +5,10 @@ then
     mkdir dist
 fi
 
-which closure-compiler
+node_modules/.bin/babel tinymusic.js --out-file dist/tinymusic.js
 
-closure-compiler --js index.js --js_output_file dist/tinymusic.min.js --compilation_level ADVANCED_OPTIMIZATIONS --externs externs.js
+closure-compiler \
+    --js tinymusic.js \
+    --js_output_file dist/tinymusic.min.js \
+    --compilation_level ADVANCED_OPTIMIZATIONS \
+    --externs externs.js
