@@ -58,8 +58,8 @@ TinyMusic.prototype._loop = function _loop(frequencies) {
 
 TinyMusic.prototype._playFreq = function _playFreq(freq) {
     return new Promise(resolve => {
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
+        const oscillator = this.audioContext.createOscillator();
+        const gain = this.audioContext.createGain();
 
         oscillator.type = 'square';
         oscillator.frequency.value = freq.hz;
@@ -67,11 +67,11 @@ TinyMusic.prototype._playFreq = function _playFreq(freq) {
         gain.gain.value = 0.3;
 
         oscillator.connect(gain);
-        gain.connect(audioContext.destination);
+        gain.connect(this.audioContext.destination);
 
         oscillator.addEventListener('ended', resolve);
         oscillator.start(0);
-        oscillator.stop(audioContext.currentTime + freq.length / CROTCHETS_PER_SECOND / CROTCHETS_PER_BAR);
+        oscillator.stop(this.audioContext.currentTime + freq.length / CROTCHETS_PER_SECOND / CROTCHETS_PER_BAR);
     });
 };
 
