@@ -26,7 +26,6 @@
     TM.prototype._parse = function _parse(trackPart, bpm) {
         var header = trackPart.match(HEADER_STRUCTURE);
         var instrument = header[1];
-        var tempo = header[2];
 
         var frequencies = [];
         var note = void 0;

@@ -26,7 +26,6 @@
     TM.prototype._parse = function _parse(trackPart, bpm) {
         const header = trackPart.match(HEADER_STRUCTURE);
         const instrument = header[1];
-        const tempo = header[2];
 
         const frequencies = [];
         let note;
