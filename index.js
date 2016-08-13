@@ -54,7 +54,7 @@ TinyMusic.prototype._loop = function _loop(frequencies) {
     const playPromise = frequencies.reduce((promise, freq) => promise.then(() => this._playFreq(freq)), Promise.resolve());
 
     playPromise.then(() => this._loop(frequencies));
-}
+};
 
 TinyMusic.prototype._playFreq = function _playFreq(freq) {
     return new Promise(resolve => {
@@ -73,4 +73,6 @@ TinyMusic.prototype._playFreq = function _playFreq(freq) {
         oscillator.start(0);
         oscillator.stop(audioContext.currentTime + freq.length / CROTCHETS_PER_SECOND / CROTCHETS_PER_BAR);
     });
-}
+};
+
+module.exports = TinyMusic;
