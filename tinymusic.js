@@ -74,10 +74,9 @@
         return oscillator;
     };
 
+    // TODO: loop again!
     TM.prototype._loop = function _loop(oscillator, frequencies) {
         let nextTime = this.audioContext.currentTime;
-
-        oscillator.addEventListener('ended', () => this._loop(oscillator, frequencies));
 
         for (let i = 0; i < frequencies.length; i++) {
             let frequency = frequencies[i];
@@ -85,10 +84,6 @@
             nextTime += frequency.length;
 
             let isEnded = i === frequencies.length - 1;
-
-            if (isEnded) {
-                oscillator.stop(nextTime)
-            }
         }
     };
 
