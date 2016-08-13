@@ -9,42 +9,46 @@
 
     const zeroNotes = new Map([['C', 16.35], ['C#', 17.32], ['D', 18.35], ['D#', 19.45], ['E', 20.6], ['F', 21.83], ['F#', 23.12], ['G', 24.5], ['G#', 25.96], ['A', 27.5], ['A#', 29.14], ['B', 30.87], ['X', 0]]);
 
-    function TM(bpm, instruments, tracks) {
+    function TM(instruments, tracks) {
         this.audioContext = new AudioContext();
-        this.tracks = new Map(tracks);
-        this.crotchetsPerSecond = bpm / 60;
+        this.tracks = tracks;
     }
 
     TM.prototype.play = function play(trackName) {
-        const trackParts = this.tracks.get(trackName);
+        const track = this.tracks[trackName];
 
-        for (let i in trackParts) {
-            let frequencies = this._parse(trackParts[i]);
+        for (let i in track.parts) {
+            let frequencies = this._parse(track.parts[i], track.bpm);
             this._loop(frequencies);
         }
     };
 
-    TM.prototype._parse = function _parse(track) {
-        const header = track.match(HEADER_STRUCTURE);
+    TM.prototype._parse = function _parse(trackPart, bpm) {
+        const header = trackPart.match(HEADER_STRUCTURE);
         const instrument = header[1];
         const tempo = header[2];
 
         const frequencies = [];
         let note;
 
-        while ((note = NOTE_STRUCTURE.exec(track))) {
+        while ((note = NOTE_STRUCTURE.exec(trackPart))) {
             let name = note[1];
             let octave = note[2];
             let length = note[3];
 
             frequencies.push({
-                length,
+                length: this._getFreqLength(length, bpm),
                 hz: this._convertToFrequency(name, octave, length)
             });
         }
 
         return frequencies;
     };
+
+    TM.prototype._getFreqLength = function _getFreqLength(length, bpm) {
+        const crotchetsPerSecond = bpm / 60;
+        return parseInt(length) / crotchetsPerSecond / CROTCHETS_PER_BAR;
+    }
 
     TM.prototype._convertToFrequency = function _convertToFrequency(name, octave, length) {
         const baseFrequency = zeroNotes.get(name);
@@ -58,7 +62,7 @@
     };
 
     TM.prototype._playFreq = function _playFreq(freq) {
-        return new Promise(resolve => {
+        return new Promise(resolve => { 
             const oscillator = this.audioContext.createOscillator();
             const gain = this.audioContext.createGain();
 
@@ -72,7 +76,7 @@
 
             oscillator.addEventListener('ended', resolve);
             oscillator.start(0);
-            oscillator.stop(this.audioContext.currentTime + freq.length / this.crotchetsPerSecond / CROTCHETS_PER_BAR);
+            oscillator.stop(this.audioContext.currentTime + freq.length);
         });
     };
 

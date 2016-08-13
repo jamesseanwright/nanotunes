@@ -11,14 +11,16 @@
         <script>
             'use strict';
 
-            var tinyMusic = new TM(240, null, [
-                [
-                    'title', [
+            var tinyMusic = new TM(null, {
+                title: {
+                    bpm: 240,
+
+                    parts: [
                         'GTRC44C44G44A44A#44A44G44E44',
-	                    'BSSC24C24G14G14A#14A#14B14B14'
+                        'BSSC24C24G14G14A#14A#14B14B14'
                     ]
-                ]
-            ]);
+                }
+            });
 
             tinyMusic.play('title');
         </script>
