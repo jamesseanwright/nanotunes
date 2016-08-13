@@ -18,10 +18,11 @@
     TM.prototype.play = function play(trackName) {
         const track = this.tracks[trackName];
 
-        for (let i in track.parts) {
+        for (let i = 0; i < track.parts.length; i++) {
             let instrument = this.instruments[this._parseInstrument(track.parts[i])];
             let frequencies = this._parseFreqs(track.parts[i], track.bpm);
-            this._loop(instrument, frequencies);
+            let oscillator = this._createOscillator(instrument);
+            this._loop(oscillator, frequencies);
         }
     };
 
@@ -58,30 +59,37 @@
         return baseFrequency * Math.pow(TWELTH_ROOT_OF_TWO, SEMITONES_PER_OCTAVE * octave);
     };
 
-    TM.prototype._loop = function _loop(instrument, frequencies) {
-        const playPromise = frequencies.reduce((promise, freq) => {
-            return promise.then(() => this._playFreq(instrument, freq))
-        }, Promise.resolve());
+    TM.prototype._createOscillator = function _createOscillator(instrument) {
+        const oscillator = this.audioContext.createOscillator();
 
-        playPromise.then(() => this._loop(instrument, frequencies));
+        oscillator.type = instrument.wave;
+        oscillator.frequency.value = 0;
+
+        let nextNode = this._applyGain(oscillator, instrument.gain);
+        nextNode = this._applyPan(nextNode, instrument.pan);
+        nextNode.connect(this.audioContext.destination);
+        
+        oscillator.start();
+
+        return oscillator;
     };
 
-    TM.prototype._playFreq = function _playFreq(instrument, freq) {
-        return new Promise(resolve => { 
-            const oscillator = this.audioContext.createOscillator();
+    TM.prototype._loop = function _loop(oscillator, frequencies) {
+        let nextTime = this.audioContext.currentTime;
 
-            oscillator.type = instrument.wave;
-            oscillator.frequency.value = freq.hz;
+        oscillator.addEventListener('ended', () => this._loop(oscillator, frequencies));
 
-            let nextNode = this._applyGain(oscillator, instrument.gain);
-            nextNode = this._applyPan(nextNode, instrument.pan);
-            
-            nextNode.connect(this.audioContext.destination);
+        for (let i = 0; i < frequencies.length; i++) {
+            let frequency = frequencies[i];
+            oscillator.frequency.setValueAtTime(frequencies[i].hz, nextTime);
+            nextTime += frequency.length;
 
-            oscillator.addEventListener('ended', resolve);
-            oscillator.start(0);
-            oscillator.stop(this.audioContext.currentTime + freq.length);
-        });
+            let isEnded = i === frequencies.length - 1;
+
+            if (isEnded) {
+                oscillator.stop(nextTime)
+            }
+        }
     };
 
     TM.prototype._applyGain = function _applyGain(node, gain) {
