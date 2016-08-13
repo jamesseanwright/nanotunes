@@ -4,7 +4,8 @@
   "description": "A small music format and an accompanying implementation using OscillatorNode",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "./tasks/build.sh"
   },
   "repository": {
     "type": "git",
