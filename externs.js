@@ -1,4 +1,4 @@
 /* externs definition for Closure
- * Compiler to protect CommonJS API */
+ * Compiler to protect constructor name */
 
-var module, exports;
+var TM;
