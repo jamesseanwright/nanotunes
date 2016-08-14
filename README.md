@@ -161,3 +161,8 @@ Once installed, run `npm i` in the project's directory, which will install Babel
 ### Tests
 
 There are no unit tests as of yet. These will be written once js13kGames 2016 is over.
+
+
+## A Note On The Name
+
+I'm aware of Kevin Cennis' [amazing library of the same name](https://github.com/kevincennis/TinyMusic). I'll rename my library very soon.
