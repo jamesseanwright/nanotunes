@@ -4,6 +4,8 @@ TinyMusic is a small schema for structuring music. This repository includes a Ja
 
 Developers must shape their own sounds; TinyMusic is simply a means of representing the notes that should be played, and for how long per bar.
 
+<p>Try out the [demo](https://jamesseanwright.github.io/tinymusic).</p>
+
 ## The Schema
 
 The general structure is:
