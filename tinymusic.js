@@ -76,15 +76,17 @@
 
     // TODO: loop again!
     TM.prototype._loop = function _loop(oscillator, frequencies) {
-        let nextTime = this.audioContext.currentTime;
+        let nextTime = 0;
 
         for (let i = 0; i < frequencies.length; i++) {
             let frequency = frequencies[i];
-            oscillator.frequency.setValueAtTime(frequencies[i].hz, nextTime);
+            oscillator.frequency.setValueAtTime(frequencies[i].hz, this.audioContext.currentTime + nextTime);
             nextTime += frequency.length;
-
-            let isEnded = i === frequencies.length - 1;
         }
+
+        console.log(nextTime * 1000);
+
+        setTimeout(() => this._loop(oscillator, frequencies), nextTime * 1000);
     };
 
     TM.prototype._applyGain = function _applyGain(node, gain) {
