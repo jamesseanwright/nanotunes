@@ -1,15 +1,73 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TinyMusic Demo</title>
+        <title>TinyMusic</title>
         <meta charset="utf-8" />
+
+        <style>
+            body {
+                font-family: Arial;
+            }
+        </style>
     </head>
 
     <body>
+        <h1>TinyMusic</h1>
+
+        <p>TinyMusic is a small schema for structuring music. This repository includes a JavaScript implementation for the browser, built upon <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode">OscillatorNode</a>.</p>
+
+        <p>To get started, consult the <a href="https://github.com/jamesseanwright/tinymusic#tinymusic">README</a>.</p>
+
+        <button id="play">Play Demo Track</button>
+
+        <pre>
+'use strict';
+
+var instruments = {
+    VOX: {
+        wave: 'square',
+        pan: -0.5,
+        gain: 0.3
+    },
+
+    BSS: {
+        wave: 'triangle',
+        pan: 0.5,
+        gain: 0.7
+    },
+
+    GTR: {
+        wave: 'sawtooth',
+        pan: 0.8,
+        gain: 0.4
+    },
+};
+
+var tracks = {
+    title: {
+        bpm: 180,
+
+        parts: [
+	    'VOXC44C44G44A44A#44A44G44E44C44C44G44A44A#44A44G44E44F44F44C54D54D#54D54C54A44C44C44G44A44A#44A44G44E44G44B44D54B44F44A44C54A44C44C44G44A44A#44A44G44E44',
+
+            'GTRC32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42F32F42F32F42A32A42A32A42C42C52C42C52D#42D#52D#42D#52C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42G32G42G32G42D32D42D32D42F32F42F32F42C32C42C32C42C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42',
+
+            'BSSC24C24G14G14A#14A#14B14B14C24C24G14G14A#14A#14B14B14F24F24D24D24D#24D#24E24E24C24C24G14G14A#14A#14B14B14G24B24G24B24F24A24F24A24C24C24G14G14A#14A#14B14B14',
+        ]
+    }
+};
+
+var tinyMusic = new TM(instruments, tracks);
+
+tinyMusic.play('title');
+        </pre>
+
         <script src="tinymusic.min.js"></script>
 
         <script>
             'use strict';
+
+            var playButton = document.querySelector('#play');
 
             var instruments = {
                 VOX: {
@@ -38,16 +96,18 @@
                     parts: [
                         'VOXC44C44G44A44A#44A44G44E44C44C44G44A44A#44A44G44E44F44F44C54D54D#54D54C54A44C44C44G44A44A#44A44G44E44G44B44D54B44F44A44C54A44C44C44G44A44A#44A44G44E44',
                         
-                        'GTRC32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42F32F42F32F42A32A42A32A42C42C52C42C52D#42D#52D#42D#52C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42G32G42G32G42D32D42D32D42F32F42F32F42C32C42C32C42 C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42',
+                        'GTRC32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42F32F42F32F42A32A42A32A42C42C52C42C52D#42D#52D#42D#52C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42G32G42G32G42D32D42D32D42F32F42F32F42C32C42C32C42C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42',
                         
-                        'BSSC24C24G14G14A#14A#14B14B14C24C24G14G14A#14A#14B14B14F24F24D24D24D#24D#24E24E24C24C24G14G14A#14A#14B14B14 G24B24G24B24F24A24F24A24C24C24G14G14A#14A#14B14B14',
+                        'BSSC24C24G14G14A#14A#14B14B14C24C24G14G14A#14A#14B14B14F24F24D24D24D#24D#24E24E24C24C24G14G14A#14A#14B14B14G24B24G24B24F24A24F24A24C24C24G14G14A#14A#14B14B14',
                     ]
                 }
             };
 
             var tinyMusic = new TM(instruments, tracks);
 
-            tinyMusic.play('title');
+            play.addEventListener('click', function () {
+                tinyMusic.play('title');                
+            });
         </script>
     </body>
 </html>
