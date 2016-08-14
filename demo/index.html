@@ -14,11 +14,20 @@
     <body>
         <h1>TinyMusic</h1>
 
-        <p>TinyMusic is a small schema for structuring music. This repository includes a JavaScript implementation for the browser, built upon <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode">OscillatorNode</a>.</p>
+        <p>TinyMusic is a small schema for structuring music, along with a JavaScript implementation for the browser, built upon <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode">OscillatorNode</a>.</p>
 
         <p>To get started, consult the <a href="https://github.com/jamesseanwright/tinymusic#tinymusic">README</a>.</p>
 
-        <button id="play">Play Demo Track</button>
+        <h2>Demo</h2>
+
+        <select id="select-track">
+            <option>Select Track</option>
+            <option value="boogie">Boogie</option>
+            <option value="gameOver">Game Over</option>
+        </select>
+
+        <button id="play">Play</button>
+        <button id="stop">Stop</button>
 
         <pre>
 'use strict';
@@ -44,8 +53,9 @@ var instruments = {
 };
 
 var tracks = {
-    title: {
+    boogie: {
         bpm: 180,
+        isLoop: true,
 
         parts: [
 	    'VOXC44C44G44A44A#44A44G44E44C44C44G44A44A#44A44G44E44F44F44C54D54D#54D54C54A44C44C44G44A44A#44A44G44E44G44B44D54B44F44A44C54A44C44C44G44A44A#44A44G44E44',
@@ -54,12 +64,16 @@ var tracks = {
 
             'BSSC24C24G14G14A#14A#14B14B14C24C24G14G14A#14A#14B14B14F24F24D24D24D#24D#24E24E24C24C24G14G14A#14A#14B14B14G24B24G24B24F24A24F24A24C24C24G14G14A#14A#14B14B14',
         ]
+    },
+
+    gameOver: {
+        bpm: 60,
     }
 };
 
 var tinyMusic = new TM(instruments, tracks);
 
-tinyMusic.play('title');
+tinyMusic.play('boogie');
         </pre>
 
         <script src="tinymusic.min.js"></script>
@@ -68,6 +82,8 @@ tinyMusic.play('title');
             'use strict';
 
             var playButton = document.querySelector('#play');
+            var stopButton = document.querySelector('#stop');
+            var selectTrack = document.querySelector('#select-track');
 
             var instruments = {
                 VOX: {
@@ -90,8 +106,9 @@ tinyMusic.play('title');
             };
 
             var tracks = {
-                title: {
+                boogie: {
                     bpm: 180,
+                    isLooping: true,
 
                     parts: [
                         'VOXC44C44G44A44A#44A44G44E44C44C44G44A44A#44A44G44E44F44F44C54D54D#54D54C54A44C44C44G44A44A#44A44G44E44G44B44D54B44F44A44C54A44C44C44G44A44A#44A44G44E44',
@@ -100,13 +117,26 @@ tinyMusic.play('title');
                         
                         'BSSC24C24G14G14A#14A#14B14B14C24C24G14G14A#14A#14B14B14F24F24D24D24D#24D#24E24E24C24C24G14G14A#14A#14B14B14G24B24G24B24F24A24F24A24C24C24G14G14A#14A#14B14B14',
                     ]
+                },
+
+                gameOver: {
+                    bpm: 30,
+
+                    parts: [
+                        'BSSF24E22D22C216'
+                    ]
                 }
             };
 
             var tinyMusic = new TM(instruments, tracks);
 
-            play.addEventListener('click', function () {
-                tinyMusic.play('title');                
+            playButton.addEventListener('click', function () {
+                var track = selectTrack.value;
+                tinyMusic.play(track);                
+            });
+
+            stopButton.addEventListener('click', function () {
+                tinyMusic.stop();                
             });
         </script>
     </body>

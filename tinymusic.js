@@ -13,16 +13,28 @@
         this.audioContext = new AudioContext();
         this.instruments = instruments;
         this.tracks = tracks;
+        this.oscillators = [];
     }
 
     TM.prototype.play = function play(trackName) {
+        this.stop();
+
         const track = this.tracks[trackName];
+        const oscillators = new Array(track.parts.length);
 
         for (let i = 0; i < track.parts.length; i++) {
             let instrument = this.instruments[this._parseInstrument(track.parts[i])];
             let frequencies = this._parseFreqs(track.parts[i], track.bpm);
-            let oscillator = this._createOscillator(instrument);
-            this._loop(oscillator, frequencies);
+            oscillators[i] = this._createOscillator(instrument);
+            this._enqueueFreqs(oscillators[i], frequencies, track.isLooping);
+        }
+
+        this.oscillators = oscillators;
+    };
+
+    TM.prototype.stop = function stop() {
+        for (let i = 0; i < this.oscillators.length; i++) {
+            this.oscillators[i].stop();
         }
     };
 
@@ -74,8 +86,7 @@
         return oscillator;
     };
 
-    // TODO: loop again!
-    TM.prototype._loop = function _loop(oscillator, frequencies) {
+    TM.prototype._enqueueFreqs = function _enqueueFreqs(oscillator, frequencies, isLooping) {
         let nextTime = 0;
 
         for (let i = 0; i < frequencies.length; i++) {
@@ -84,9 +95,14 @@
             nextTime += frequency.length;
         }
 
-        console.log(nextTime * 1000);
+        setTimeout(() => {
+            if (!isLooping) {
+                this.stop();
+                return;
+            }
 
-        setTimeout(() => this._loop(oscillator, frequencies), nextTime * 1000);
+            this._enqueueFreqs(oscillator, frequencies, isLooping);
+        }, Math.round(nextTime) * 1000);
     };
 
     TM.prototype._applyGain = function _applyGain(node, gain) {

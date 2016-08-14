@@ -5,6 +5,7 @@ var TM;
 
 var track = {
     bpm: 0,
+    isLooping: false,
     parts: []
 };
 
