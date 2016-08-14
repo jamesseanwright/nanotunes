@@ -29,56 +29,12 @@
         <button id="play">Play</button>
         <button id="stop">Stop</button>
 
-        <pre>
-'use strict';
-
-var instruments = {
-    VOX: {
-        wave: 'square',
-        pan: -0.5,
-        gain: 0.3
-    },
-
-    BSS: {
-        wave: 'triangle',
-        pan: 0.5,
-        gain: 0.7
-    },
-
-    GTR: {
-        wave: 'sawtooth',
-        pan: 0.8,
-        gain: 0.4
-    },
-};
-
-var tracks = {
-    boogie: {
-        bpm: 180,
-        isLoop: true,
-
-        parts: [
-	    'VOXC44C44G44A44A#44A44G44E44C44C44G44A44A#44A44G44E44F44F44C54D54D#54D54C54A44C44C44G44A44A#44A44G44E44G44B44D54B44F44A44C54A44C44C44G44A44A#44A44G44E44',
-
-            'GTRC32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42F32F42F32F42A32A42A32A42C42C52C42C52D#42D#52D#42D#52C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42G32G42G32G42D32D42D32D42F32F42F32F42C32C42C32C42C32C42C32C42E32E42E32E42G32G42G32G42A#32A#42A#32A#42',
-
-            'BSSC24C24G14G14A#14A#14B14B14C24C24G14G14A#14A#14B14B14F24F24D24D24D#24D#24E24E24C24C24G14G14A#14A#14B14B14G24B24G24B24F24A24F24A24C24C24G14G14A#14A#14B14B14',
-        ]
-    },
-
-    gameOver: {
-        bpm: 60,
-    }
-};
-
-var tinyMusic = new TM(instruments, tracks);
-
-tinyMusic.play('boogie');
+        <pre id="example-preview">
         </pre>
 
         <script src="tinymusic.min.js"></script>
 
-        <script>
+        <script id="example">
             'use strict';
 
             var playButton = document.querySelector('#play');
@@ -120,10 +76,12 @@ tinyMusic.play('boogie');
                 },
 
                 gameOver: {
-                    bpm: 30,
+                    bpm: 60,
 
                     parts: [
-                        'BSSF24E22D22C216'
+                        'VOXF38E34D34G316',
+                        'GTRA48G44F44E41F41E41D41E412',
+                        'BSSF28E24D24C216'
                     ]
                 }
             };
@@ -138,6 +96,13 @@ tinyMusic.play('boogie');
             stopButton.addEventListener('click', function () {
                 tinyMusic.stop();                
             });
+        </script>
+
+        <script>
+            var example = document.querySelector('#example');
+            var examplePreview = document.querySelector('#example-preview');
+
+            examplePreview.textContent = example.textContent;
         </script>
     </body>
 </html>
