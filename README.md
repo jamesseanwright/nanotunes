@@ -16,7 +16,7 @@ Where:
 
 * `<Instrument Name>` is a three-character string that refers to a previously defined instrument
 * `<Note n>` is a string composed of three ordered parts:
-    * The note's musical letter (A-G), and an optional # to sharpen the note by a semitone. The letter `X` can be used as a rest note
+    * The note's musical letter (A-G), and an optional # to sharpen the note by a semitone. The letter X can be used as a rest note
     * The octave (1-8)
     * The length of the note (1-16)
 
