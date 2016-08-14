@@ -93,6 +93,20 @@ tinyMusic.play('title');
 * Minified and gzipped - 807 bytes
 
 
+### Browser Compatibility
+
+#### Confirmed
+
+* Chrome
+* Firefox
+
+
+#### Unconfirmed, but likely
+
+* Safari
+* Edge
+
+
 ### Setup
 
 **Note:** This library isn't available on npm or Bower, but I'll publish respective packages if requested.
