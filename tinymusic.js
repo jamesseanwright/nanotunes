@@ -41,7 +41,7 @@
     TM.prototype._parseInstrument = function _parseInstrument(trackPart) {
         const header = trackPart.match(HEADER_STRUCTURE);
         return header[1];
-    }
+    };
 
     TM.prototype._parseFreqs = function _parseFreqs(trackPart, bpm) {
         const frequencies = [];
