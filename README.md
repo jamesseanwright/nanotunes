@@ -95,16 +95,10 @@ tinyMusic.play('title');
 
 ### Browser Compatibility
 
-#### Confirmed
-
 * Chrome
 * Firefox
-* Safari - works, but somewhat buggy
-
-
-#### Unconfirmed, but likely
-
 * Edge
+* Safari - works, but somewhat buggy
 
 
 ### Setup
