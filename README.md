@@ -99,11 +99,11 @@ tinyMusic.play('title');
 
 * Chrome
 * Firefox
+* Safari - works, but somewhat buggy
 
 
 #### Unconfirmed, but likely
 
-* Safari
 * Edge
 
 
