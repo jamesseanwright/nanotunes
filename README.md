@@ -90,7 +90,7 @@ tinyMusic.play('title');
 
 * Unminified - 4.3 KB
 * Minified - 1.6 KB
-* Minified and gzipped - 807 bytes
+* Minified and gzipped - 830 bytes
 
 
 ### Browser Compatibility
