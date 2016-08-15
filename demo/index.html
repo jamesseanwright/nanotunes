@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TinyMusic</title>
+        <title>NanoTunes</title>
         <meta charset="utf-8" />
 
         <style>
@@ -12,11 +12,11 @@
     </head>
 
     <body>
-        <h1>TinyMusic</h1>
+        <h1>NanoTunes</h1>
 
-        <p>TinyMusic is a small schema for structuring music, along with a JavaScript implementation for the browser, built upon <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode">OscillatorNode</a>. When minified and gzipped, the player script file is 830 bytes.</p>
+        <p>NanoTunes is a small schema for structuring music, along with a JavaScript implementation for the browser, built upon <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode">OscillatorNode</a>. When minified and gzipped, the player script file is 830 bytes.</p>
 
-        <p>To get started, consult the <a href="https://github.com/jamesseanwright/tinymusic#tinymusic">README</a>.</p>
+        <p>To get started, consult the <a href="https://github.com/jamesseanwright/nanotunes#nanotunes">README</a>.</p>
 
         <h2>Demo</h2>
 
@@ -32,7 +32,7 @@
         <pre id="example-preview">
         </pre>
 
-        <script src="tinymusic.min.js"></script>
+        <script src="nanotunes.min.js"></script>
 
         <script id="example">
             'use strict';
@@ -86,15 +86,15 @@
                 }
             };
 
-            var tinyMusic = new TM(instruments, tracks);
+            var nanoTunes = new NT(instruments, tracks);
 
             playButton.addEventListener('click', function () {
                 var track = selectTrack.value;
-                tinyMusic.play(track);                
+                nanoTunes.play(track);                
             });
 
             stopButton.addEventListener('click', function () {
-                tinyMusic.stop();                
+                nanoTunes.stop();                
             });
         </script>
 

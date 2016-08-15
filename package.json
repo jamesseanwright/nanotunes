@@ -1,5 +1,5 @@
 {
-  "name": "tinymusic",
+  "name": "nanotunes",
   "version": "0.2.1",
   "description": "A small music format and an accompanying implementation using OscillatorNode",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jamesseanwright/tinymusic.git"
+    "url": "git+https://github.com/jamesseanwright/nanotunes.git"
   },
   "keywords": [
     "tiny",
@@ -22,9 +22,9 @@
   "author": "James Wright <james@jamesswright.co.uk>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jamesseanwright/tinymusic/issues"
+    "url": "https://github.com/jamesseanwright/nanotunes/issues"
   },
-  "homepage": "https://github.com/jamesseanwright/tinymusic#readme",
+  "homepage": "https://github.com/jamesseanwright/nanotunes#readme",
   "devDependencies": {
     "babel-cli": "6.11.4",
     "babel-plugin-transform-es2015-arrow-functions": "6.8.0",
