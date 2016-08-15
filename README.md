@@ -4,7 +4,7 @@ NanoTunes is a small schema for structuring music. This repository includes a Ja
 
 Developers must shape their own sounds; NanoTunes is simply a means of representing the notes that should be played, and for how long per bar.
 
-Try out the [demo](https://jamesseanwright.github.io/nanotunes).
+Try out the [demo](https://jamesseanwright.github.io/nanotunes/).
 
 ## The Schema
 
