@@ -10,7 +10,7 @@
     var zeroNotes = new Map([['C', 16.35], ['C#', 17.32], ['D', 18.35], ['D#', 19.45], ['E', 20.6], ['F', 21.83], ['F#', 23.12], ['G', 24.5], ['G#', 25.96], ['A', 27.5], ['A#', 29.14], ['B', 30.87], ['X', 0]]);
 
     function TM(instruments, tracks) {
-        this.audioContext = new AudioContext();
+        this.audioContext = new (window.AudioContext || webkitAudioContext)();
         this.instruments = instruments;
         this.tracks = tracks;
         this.oscillators = [];
@@ -116,7 +116,7 @@
     };
 
     TM.prototype._applyEffect = function _applyEffect(node, val, method, prop) {
-        if (!val) {
+        if (!val || !this.audioContext[method]) {
             return node;
         }
 
