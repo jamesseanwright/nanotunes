@@ -1,6 +1,6 @@
 {
   "name": "nanotunes",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "A small music format and an accompanying implementation using OscillatorNode",
   "main": "index.js",
   "scripts": {

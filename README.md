@@ -115,10 +115,9 @@ Loading this script will attach the `NT` constructor to the `window` object.
 
 ### API
 
-#### `NT(instruments, tracks)`
+#### `NT(instruments, tracks [, audioContext])`
 
-A constructor function to create a new instance of NanoTunes.
-
+A constructor function to create a new instance of NanoTunes. The third parameter, which is optional, allows you to use a previously instantiated `AudioContext`. This is desirable if, for example, you're also generating sound effects with the Web Audio API.
 
 #### Defining Instruments
 
@@ -150,6 +149,19 @@ Plays a track by name.
 #### `NT.prototype.stop()`
 
 Stops playing the current track.
+
+
+#### The `onStop` callback
+
+It's possible to attach a method to your NanoTunes instance called `onStop`. This will invoke whenever a non-looping track ends. This is useful for scheduling.
+
+```
+var nanoTunes = new NT(instruments, tracks);
+
+nanoTunes.onStop = function onStop() {
+    console.log('Current track has ended.');
+};
+```
 
 
 ### Building Locally
