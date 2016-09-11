@@ -1,7 +1,7 @@
 /* externs definition for Closure
  * Compiler to protect constructor name */
 
-var NT;
+var NT = function () {};
 
 var track = {
     bpm: 0,
@@ -14,3 +14,5 @@ var instrument = {
     gain: 0,
     track: 0
 };
+
+NT.prototype.onStop = function () {};
