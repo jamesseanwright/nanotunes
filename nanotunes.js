@@ -1,4 +1,4 @@
-(function () {
+(function (root) {
     'use strict';
 
     const HEADER_STRUCTURE = /^([A-Z]{3})/;
@@ -10,7 +10,7 @@
     const zeroNotes = new Map([['C', 16.35], ['C#', 17.32], ['D', 18.35], ['D#', 19.45], ['E', 20.6], ['F', 21.83], ['F#', 23.12], ['G', 24.5], ['G#', 25.96], ['A', 27.5], ['A#', 29.14], ['B', 30.87], ['X', 0]]);
 
     function NT(instruments, tracks, audioContext) {
-        this.audioContext = audioContext || new (window.AudioContext || webkitAudioContext)();
+        this.audioContext = audioContext || new (root.AudioContext || webkitAudioContext)();
         this.instruments = instruments;
         this.tracks = tracks;
         this.oscillators = [];
@@ -54,7 +54,7 @@
 
             frequencies.push({
                 length: this._getFreqLength(length, bpm),
-                hz: this._convertToFrequency(name, octave, length)
+                hz: this._convertToFrequency(name, octave)
             });
         }
 
@@ -66,7 +66,7 @@
         return parseInt(length) / crotchetsPerSecond / CROTCHETS_PER_BAR;
     }
 
-    NT.prototype._convertToFrequency = function _convertToFrequency(name, octave, length) {
+    NT.prototype._convertToFrequency = function _convertToFrequency(name, octave) {
         const baseFrequency = zeroNotes.get(name);
         return baseFrequency * Math.pow(TWELTH_ROOT_OF_TWO, SEMITONES_PER_OCTAVE * octave);
     };
@@ -126,5 +126,5 @@
         return nextNode;
     };
 
-    this.NT = NT;
-}(this));
+    root.NT = NT;
+}(typeof global !== 'undefined' ? global : window));
