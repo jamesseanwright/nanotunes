@@ -2,15 +2,10 @@
 
 const expect = require('chai').expect;
 const sinon = require('sinon');
+const NT = require('../lib/nanotunes');
 
 describe('NanoTunes', function () {
     stubAudioContext();
-
-    /* TODO: support CommonJS. Current
-        * version attaches to executing
-        * environment's global. */
-    require('../nanotunes');
-    const NT = global.NT;
 
     describe('the _parseInstrument method', function () {
         it('should parse the three-letter instrument name from an individual track part', function () {
@@ -25,7 +20,7 @@ describe('NanoTunes', function () {
     describe('the _getFreqLength method', function () {
         it('should return a length, in seconds, for which a note\'s duration should be played', function () {
             const bpm = 120;
-            const length = 4 // a crotchet
+            const length = 4; // a crotchet
             const expectedLength = 0.5;
             const actualLength = NT.prototype._getFreqLength(length, bpm);
 

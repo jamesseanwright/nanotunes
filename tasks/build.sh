@@ -5,10 +5,10 @@ then
     mkdir dist
 fi
 
-node_modules/.bin/babel nanotunes.js --out-file dist/nanotunes.js
+node_modules/.bin/babel lib/nanotunes.js --out-file dist/nanotunes.js
 
 closure-compiler \
-    --js nanotunes.js \
+    --js dist/nanotunes.js \
     --js_output_file dist/nanotunes.min.js \
     --compilation_level ADVANCED_OPTIMIZATIONS \
     --externs externs.js
