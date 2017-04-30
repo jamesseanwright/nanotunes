@@ -1,5 +1,7 @@
 # NanoTunes
 
+[![npm version](https://img.shields.io/npm/v/nanotunes.svg)](https://www.npmjs.com/package/nanotunes)
+
 NanoTunes is a small schema for structuring music. This repository includes a JavaScript implementation, built upon [`OscillatorNode`](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode).
 
 Developers must shape their own sounds; NanoTunes is simply a means of representing the notes that should be played, and for how long per bar.
@@ -108,7 +110,7 @@ nanoTunes.play('title');
 Nanotunes is available as a CommonJS module, which is compatible with Browserify and Webpack.
 
 ```
-npm i --save nanotunes.
+npm i --save nanotunes
 ```
 
 This module exposes the `NT` constructor directly:
