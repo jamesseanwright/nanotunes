@@ -1,0 +1,8 @@
+demo
+dist/nanotunes.min.js
+lib
+tasks
+test
+.babelrc
+eslintrc.js
+externs.js

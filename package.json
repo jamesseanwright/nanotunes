@@ -17,6 +17,7 @@
     "synthesis",
     "oscillator",
     "oscillatornode",
+    "chiptune",
     "js13kgames"
   ],
   "author": "James Wright <james@jamesswright.co.uk>",
