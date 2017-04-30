@@ -1,8 +1,8 @@
 {
   "name": "nanotunes",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A small music format and an accompanying implementation using OscillatorNode",
-  "main": "index.js",
+  "main": "dist/nanotunes.js",
   "scripts": {
     "test": "eslint src lib && mocha",
     "build": "./tasks/build.sh"
