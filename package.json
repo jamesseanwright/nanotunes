@@ -4,7 +4,7 @@
   "description": "A small music format and an accompanying implementation using OscillatorNode",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "eslint src lib && mocha",
     "build": "./tasks/build.sh"
   },
   "repository": {
@@ -30,6 +30,7 @@
     "babel-plugin-transform-es2015-arrow-functions": "6.8.0",
     "babel-plugin-transform-es2015-block-scoping": "6.10.1",
     "chai": "3.5.0",
+    "eslint": "^3.19.0",
     "mocha": "3.1.2",
     "sinon": "1.17.6"
   }
